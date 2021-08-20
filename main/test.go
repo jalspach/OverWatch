@@ -1,19 +1,14 @@
 package main
 
 import (
-	"fmt"
-	//"github/jalspach/HallMonitor/leds"
-	"time"
 
-	"../mypackages/leds"
-	"github.com/stianeikeland/go-rpio"
+	//"github/jalspach/HallMonitor/leds"
+
+	"../internal/leds"
+	//	"../mypackages/leds"
 )
-func main () {
-	leds.Setstatus(0x0)	
+
+func main() {
+	leds.Setstatus(0x0)
 
 }
-
-	
-
-
-
