@@ -31,12 +31,11 @@ func Setstatus(hex int) int {
 	}
 
 	defer rpio.Close()
+
 	green := rpio.Pin(17)
 	green.Output()
-
 	yellow := rpio.Pin(27)
 	yellow.Output()
-
 	red := rpio.Pin(22)
 	red.Output()
 
@@ -146,12 +145,11 @@ func Sweep(speed int) int {
 
 	green := rpio.Pin(17)
 	green.Output()
-
 	yellow := rpio.Pin(27)
 	yellow.Output()
-
 	red := rpio.Pin(22)
 	red.Output()
+
 	for x := 0; x < speed; x++ {
 		green.Toggle()
 		time.Sleep(time.Second / 5)
@@ -164,7 +162,7 @@ func Sweep(speed int) int {
 	return 0
 }
 
-// provide the number of seconds / speed cycles
+// Displays an error combo of flashing leds for a specifc amount of time
 func Error(cycles, speed int) int {
 	fmt.Println("opening gpio")
 	err := rpio.Open()
@@ -176,12 +174,11 @@ func Error(cycles, speed int) int {
 
 	green := rpio.Pin(17)
 	green.Output()
-
 	yellow := rpio.Pin(27)
 	yellow.Output()
-
 	red := rpio.Pin(22)
 	red.Output()
+
 	for x := 0; x < cycles; x++ {
 		red.High()
 		yellow.Low()
@@ -195,7 +192,7 @@ func Error(cycles, speed int) int {
 	return 0
 }
 
-// provide the number of seconds / speed cycles
+// Runs through all of the statusus in order to test LED fuctionality
 func Test() int {
 	fmt.Println("opening gpio")
 	err := rpio.Open()
@@ -212,7 +209,7 @@ func Test() int {
 	red := rpio.Pin(22)
 	red.Output()
 
-	for x := 0; x < 16; x++ {
+	for x := 0; x < 17; x++ {
 		leds.Setstatus(x)
 		time.Sleep(time.Second)
 	}

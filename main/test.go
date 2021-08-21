@@ -6,9 +6,5 @@ import (
 )
 
 func main() {
-	leds.Setstatus(0x0)
-	leds.Error(5, 5)
-	coms.Tempc()
-	coms.Tempf()
-	coms.Tempsensors()
+	leds.Test()
 }
