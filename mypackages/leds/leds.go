@@ -163,7 +163,7 @@ func Sweep(speed int) int {
 	}
 	return 0
 
-	func Errir(speed int) int {
+	func Error(speed,  int) int {
 		fmt.Println("opening gpio")
 		err := rpio.Open()
 		if err != nil {
