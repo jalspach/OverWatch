@@ -39,7 +39,7 @@ func Setstatus(hex int) int {
 
 	red := rpio.Pin(22)
 	red.Output()
-	
+
 	// Set the status of the leds
 	switch hex {
 	case 0x_0:
@@ -162,32 +162,59 @@ func Sweep(speed int) int {
 
 	}
 	return 0
+}
 
-	func Error(speed,  int) int {
-		fmt.Println("opening gpio")
-		err := rpio.Open()
-		if err != nil {
-			panic(fmt.Sprint("unable to open gpio...must be root to run", err.Error()))
-		}
-	
-		defer rpio.Close()
-	
-		green := rpio.Pin(17)
-		green.Output()
-	
-		yellow := rpio.Pin(27)
-		yellow.Output()
-	
-		red := rpio.Pin(22)
-		red.Output()
-		for x := 0; x < speed; x++ {
-			green.Toggle()
-			time.Sleep(time.Second / 5)
-			yellow.Toggle()
-			time.Sleep(time.Second / 5)
-			red.Toggle()
-			time.Sleep(time.Second / 5)
-	
-		}
-		return 0
+// provide the number of seconds / speed cycles
+func Error(cycles, speed int) int {
+	fmt.Println("opening gpio")
+	err := rpio.Open()
+	if err != nil {
+		panic(fmt.Sprint("unable to open gpio...must be root to run", err.Error()))
+	}
+
+	defer rpio.Close()
+
+	green := rpio.Pin(17)
+	green.Output()
+
+	yellow := rpio.Pin(27)
+	yellow.Output()
+
+	red := rpio.Pin(22)
+	red.Output()
+	for x := 0; x < cycles; x++ {
+		red.High()
+		yellow.Low()
+		green.High()
+		time.Sleep(time.Second / speed)
+		red.Low()
+		yellow.High()
+		green.Low()
+		time.Sleep(time.Second / speed)
+	}
+	return 0
+}
+
+// provide the number of seconds / speed cycles
+func Test() int {
+	fmt.Println("opening gpio")
+	err := rpio.Open()
+	if err != nil {
+		panic(fmt.Sprint("unable to open gpio...must be root to run", err.Error()))
+	}
+
+	defer rpio.Close()
+
+	green := rpio.Pin(17)
+	green.Output()
+	yellow := rpio.Pin(27)
+	yellow.Output()
+	red := rpio.Pin(22)
+	red.Output()
+
+	for x := 0; x < 16; x++ {
+		leds.Setstatus(x)
+		time.Sleep(time.Second)
+	}
+	return 0
 }
