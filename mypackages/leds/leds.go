@@ -5,6 +5,9 @@ import (
 	"time"
 
 	"github.com/stianeikeland/go-rpio"
+
+	//not sure its ok to import yourself lol Is there a better way to refer to other functions from withint the same document
+	"github.com/jalspach/OverWatch/mypackages/leds"
 )
 
 // returns status of the LED's in bianry

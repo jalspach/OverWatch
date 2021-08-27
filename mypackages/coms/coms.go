@@ -34,7 +34,7 @@ func Tempf() float64 {
 	for _, sensor := range sensors {
 		t, err := ds18b20.Temperature(sensor)
 		if err == nil {
-			f == t/(5/9)+32
+			f := t/(5/9)+32
 			return f
 		}
 	}
