@@ -163,7 +163,7 @@ func Sweep(speed int) int {
 }
 
 // Displays an error combo of flashing leds for a specifc amount of time
-func Error(cycles, speed int) int {
+func Error() int {
 	fmt.Println("opening gpio")
 	err := rpio.Open()
 	if err != nil {
@@ -179,15 +179,15 @@ func Error(cycles, speed int) int {
 	red := rpio.Pin(22)
 	red.Output()
 
-	for x := 0; x < cycles; x++ {
+	for x := 0; x < 5; x++ {
 		red.High()
 		yellow.Low()
 		green.High()
-		time.Sleep(time.Second / speed)
+		time.Sleep(time.Second / 1)
 		red.Low()
 		yellow.High()
 		green.Low()
-		time.Sleep(time.Second / speed)
+		time.Sleep(time.Second / 1)
 	}
 	return 0
 }
