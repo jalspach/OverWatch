@@ -7,6 +7,30 @@ import (
 	"github.com/stianeikeland/go-rpio"
 )
 
+//reset LEDS back to off
+func Reset() int {
+	fmt.Println("opening gpio")
+	err := rpio.Open()
+	if err != nil {
+		panic(fmt.Sprint("unable to open gpio...must be root to run", err.Error()))
+	}
+
+	defer rpio.Close()
+
+	green := rpio.Pin(17)
+	green.Output()
+	yellow := rpio.Pin(27)
+	yellow.Output()
+	red := rpio.Pin(22)
+	red.Output()
+
+	red.Low()
+	yellow.Low()
+	green.Low()
+	return 0
+
+}
+
 // returns status of the LED's in bianry
 // want to know whether an LED is on, off or flashing
 // binary (LSB) Red, Yellow Green, Blink
@@ -86,42 +110,103 @@ func Setstatus(hex int) int {
 		//Not Valid (all off but still flashing)
 	case 0x_9:
 		//Red flashing
-		red.Toggle()
 		yellow.Low()
 		green.Low()
+		red.High()
+		time.Sleep(time.Millisecond * 250)
+		red.Low()
+		time.Sleep(time.Millisecond * 250)
+		red.High()
+		time.Sleep(time.Millisecond * 250)
+		red.Low()
+
 	case 0x_A:
 		//Yellow flashing
+
 		red.Low()
-		yellow.Toggle()
 		green.Low()
+		yellow.High()
+		time.Sleep(time.Millisecond * 250)
+		yellow.Low()
+		time.Sleep(time.Millisecond * 250)
+		yellow.High()
+		time.Sleep(time.Millisecond * 250)
+		yellow.Low()
 
 	case 0x_B:
 		//Red and Yellow flashing
-		red.Toggle()
-		yellow.Toggle()
 		green.Low()
+		yellow.High()
+		red.High()
+		time.Sleep(time.Millisecond * 250)
+		yellow.Low()
+		red.Low()
+		time.Sleep(time.Millisecond * 250)
+		yellow.High()
+		red.High()
+		time.Sleep(time.Millisecond * 250)
+		yellow.Low()
+		red.Low()
+
 	case 0x_C:
 		//Green flashing
 		red.Low()
 		yellow.Low()
-		green.Toggle()
+		green.High()
+		time.Sleep(time.Millisecond * 250)
+		green.Low()
+		time.Sleep(time.Millisecond * 250)
+		green.High()
+		time.Sleep(time.Millisecond * 250)
+		green.Low()
 	case 0x_D:
 		//Red Green flashing
-		red.Toggle()
 		yellow.Low()
-		green.Toggle()
+		red.High()
+		green.High()
+		time.Sleep(time.Millisecond * 250)
+		red.Low()
+		green.Low()
+		time.Sleep(time.Millisecond * 250)
+		red.High()
+		green.High()
+		time.Sleep(time.Millisecond * 250)
+		green.Low()
+		red.Low()
 
 	case 0x_E:
 		//Yellow and Green flashing
+
 		red.Low()
-		yellow.Toggle()
-		green.Toggle()
+		yellow.High()
+		green.High()
+		time.Sleep(time.Millisecond * 250)
+		yellow.Low()
+		green.Low()
+		time.Sleep(time.Millisecond * 250)
+		yellow.High()
+		green.High()
+		time.Sleep(time.Millisecond * 250)
+		green.Low()
+		yellow.Low()
 
 	case 0x_F:
 		//Red, Yellow and Green flashing
-		red.Toggle()
-		yellow.Toggle()
-		green.Toggle()
+		red.High()
+		yellow.High()
+		green.High()
+		time.Sleep(time.Millisecond * 250)
+		red.Low()
+		yellow.Low()
+		green.Low()
+		time.Sleep(time.Millisecond * 250)
+		red.High()
+		yellow.High()
+		green.High()
+		time.Sleep(time.Millisecond * 250)
+		red.Low()
+		green.Low()
+		yellow.Low()
 	default:
 		return 0x_BEEF
 	}
@@ -179,15 +264,15 @@ func Error() int {
 	red := rpio.Pin(22)
 	red.Output()
 
-	for x := 0; x < 5; x++ {
+	for x := 0; x < 10; x++ {
 		red.High()
 		yellow.Low()
 		green.High()
-		time.Sleep(time.Second / 1)
+		time.Sleep(time.Second / 2)
 		red.Low()
 		yellow.High()
 		green.Low()
-		time.Sleep(time.Second / 1)
+		time.Sleep(time.Second / 2)
 	}
 	return 0
 }
@@ -211,7 +296,7 @@ func Test() int {
 
 	for x := 0; x < 17; x++ {
 		Setstatus(x)
-		time.Sleep(time.Second)
+		time.Sleep(time.Second * 1)
 
 	}
 	return 0

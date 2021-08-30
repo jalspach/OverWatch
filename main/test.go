@@ -6,9 +6,9 @@ import (
 )
 
 func main() {
-	leds.Test()
 	leds.Error()
 	leds.Test()
 	coms.Tempc()
+	leds.Reset()
 
 }

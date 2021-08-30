@@ -7,6 +7,7 @@ case "$1" in
 	# Straight Build
     echo Building for the Pi
 		env GOOS=linux GOARCH=arm GOARM=5 go build
+		scp * jalspach@10.0.50.53:/home/jalspach/Public
 	;;
   rebuild)
 	#Remove old files
@@ -21,7 +22,7 @@ stop|reload|restart|build2pi)
 #obviously need a way to enter the proper pi
   echo Building for the Pi
 		env GOOS=linux GOARCH=arm GOARM=5 go build
-		scp * jalspach@10.0.0.110:/home/jalspach/Public
+		scp * jalspach@10.0.50.53:/home/jalspach/Public
 
 	;;
   *)
