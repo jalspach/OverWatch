@@ -2,11 +2,8 @@ package coms
 
 import (
 	"fmt"
-	"log"
-	"net/url"
-	"time"
 
-	mqtt "github.com/eclipse/paho.mqtt.golang"
+	//mqtt "github.com/eclipse/paho.mqtt.golang"
 	"github.com/yryz/ds18b20"
 )
 
@@ -57,7 +54,7 @@ func Tempsensors() float64 {
 }
 
 //MQTT communications and routines
-
+/*
 //place holders so as not to delete the import :-) taken from https://www.cloudmqtt.com/docs/go.html and https://www.emqx.com/en/blog/how-to-use-mqtt-in-golang
 func MQTTconnect(clientId string, uri *url.URL) mqtt.Client {
 	opts := createClientOptions(clientId, uri)
@@ -87,3 +84,4 @@ func MQTTlisten(uri *url.URL, topic string) {
 		fmt.Printf("* [%s] %s\n", msg.Topic(), string(msg.Payload()))
 	})
 }
+*/
