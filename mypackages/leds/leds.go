@@ -278,12 +278,12 @@ func Test() int {
 
 //Display Temprature on LED's
 func DisplayTemp() int {
-	coms.Listb20s()
+	//coms.Listb20s()
 	var c float64 = coms.Tempc()
-	fmt.Printf("%f\n", c)
+	//fmt.Printf("%f\n", c)
 
 	f := c/(.556) + 32
-	fmt.Printf("%f\n", f)
+	//fmt.Printf("%f\n", f)
 	switch {
 	case f > 100:
 		Setstatus(0x_1)
