@@ -7,6 +7,16 @@ import (
 	"github.com/yryz/ds18b20"
 )
 
+//Return list of ds18B20's
+func Listb20s() int {
+	sensors, err := ds18b20.Sensors()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("sensor IDs: %v\n", sensors)
+	return 0
+}
+
 //Returns the temprature in Celsius
 func Tempc() float64 {
 	sensors, err := ds18b20.Sensors()
@@ -72,7 +82,7 @@ func MQTTcreateClientOptions(clientId string, uri *url.URL) *mqtt.ClientOptions 
 	opts := mqtt.NewClientOptions()
 	opts.AddBroker(fmt.Sprintf("tcp://%s", uri.Host))
 	opts.SetUsername(uri.User.Username())
-	password, _ := uri.User.Password() 
+	password, _ := uri.User.Password()
 	opts.SetPassword(password)
 	opts.SetClientID(clientId)
 	return opts

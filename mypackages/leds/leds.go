@@ -7,8 +7,8 @@ import (
 	"github.com/stianeikeland/go-rpio"
 )
 
-//reset LEDS back to off
-func Reset() int {
+//init LEDS - opens the channel and resets LEDS to low.
+func Init() int {
 	fmt.Println("opening gpio")
 	err := rpio.Open()
 	if err != nil {
@@ -28,24 +28,12 @@ func Reset() int {
 	yellow.Low()
 	green.Low()
 	return 0
-
-}
-
-// returns status of the LED's in bianry
-// want to know whether an LED is on, off or flashing
-// binary (LSB) Red, Yellow Green, Blink
-// 0 all off, 1 Red solid, 2 yellow solid, 3 red and yellow solid, 4 green solid, 5 red and green solid, 6 green and yellow solid, 7 red yellow and green solid
-// 8 NA (All off and flashing), 9 Red Flashing, A yellow flashing, B red and yellow flashing, C green flashing, D Green and Red flashing, E green and yellow flashing, green yellow and red flashing
-
-func Checkstatus() int {
-	//returns the status of the LED's
-	return 0
 }
 
 /*
  Set the status of the LED's based on the the provided Hex value. If an invalid number is passed will return 0X_BEEF if everything worked it will return 0x_FFFF.
  Uses binary to set the status. 1 bit for each LED. Starting with the LSB its Red, Green, Yellow.
- Add 8 (b1000) for flash. This does not cover every combination yet but may eventually.
+ Add 8 (b1000) for flash however, currtnly is just toggles that bit from what it was. ToDo: build flash, cover other combos.
 */
 func Setstatus(hex int) int {
 	fmt.Println("opening gpio")
@@ -219,61 +207,46 @@ func Setthinking() int {
 	return 0
 }
 
-func Sweep(speed int) int {
-	fmt.Println("opening gpio")
-	err := rpio.Open()
-	if err != nil {
-		panic(fmt.Sprint("unable to open gpio...must be root to run", err.Error()))
+//Sweep the LEDS from Red to Green using the dwell time (in milliseconds)
+func SweepR2G(dwell int) int {
+	Setstatus(0x0)
+	for x := 0; x < 10; x++ {
+		Setstatus(0x1)
+		time.Sleep(time.Duration(dwell) * time.Millisecond)
+		Setstatus(0x2)
+		time.Sleep(time.Duration(dwell) * time.Millisecond)
+		Setstatus(0x4)
+		time.Sleep(time.Duration(dwell) * time.Millisecond)
 	}
-
-	defer rpio.Close()
-
-	green := rpio.Pin(17)
-	green.Output()
-	yellow := rpio.Pin(27)
-	yellow.Output()
-	red := rpio.Pin(22)
-	red.Output()
-
-	for x := 0; x < speed; x++ {
-		green.Toggle()
-		time.Sleep(time.Second / 5)
-		yellow.Toggle()
-		time.Sleep(time.Second / 5)
-		red.Toggle()
-		time.Sleep(time.Second / 5)
-
-	}
+	Setstatus(0x0)
 	return 0
 }
 
-// Displays an error combo of flashing leds for a specifc amount of time
-func Error() int {
-	fmt.Println("opening gpio")
-	err := rpio.Open()
-	if err != nil {
-		panic(fmt.Sprint("unable to open gpio...must be root to run", err.Error()))
-	}
-
-	defer rpio.Close()
-
-	green := rpio.Pin(17)
-	green.Output()
-	yellow := rpio.Pin(27)
-	yellow.Output()
-	red := rpio.Pin(22)
-	red.Output()
-
+//Sweep the LEDS from Green to Red using the dwell time (in milliseconds)
+func SweepG2R(dwell int) int {
+	Setstatus(0x0)
 	for x := 0; x < 10; x++ {
-		red.High()
-		yellow.Low()
-		green.High()
-		time.Sleep(time.Second / 2)
-		red.Low()
-		yellow.High()
-		green.Low()
-		time.Sleep(time.Second / 2)
+		Setstatus(0x4)
+		time.Sleep(time.Duration(dwell) * time.Millisecond)
+		Setstatus(0x2)
+		time.Sleep(time.Duration(dwell) * time.Millisecond)
+		Setstatus(0x1)
+		time.Sleep(time.Duration(dwell) * time.Millisecond)
 	}
+	Setstatus(0x0)
+	return 0
+}
+
+// Displays an error combo of flashing leds using the dwell time (in milliseconds)
+func Error(dwell int) int {
+	Setstatus(0x0)
+	for x := 0; x < 10; x++ {
+		Setstatus(0x2)
+		time.Sleep(time.Duration(dwell) * time.Millisecond)
+		Setstatus(0x5)
+		time.Sleep(time.Duration(dwell) * time.Millisecond)
+	}
+	Setstatus(0x0)
 	return 0
 }
 
@@ -299,5 +272,16 @@ func Test() int {
 		time.Sleep(time.Second * 1)
 
 	}
+	return 0
+}
+
+// returns status of the LED's in bianry
+// want to know whether an LED is on, off or flashing
+// binary (LSB) Red, Yellow Green, Blink
+// 0 all off, 1 Red solid, 2 yellow solid, 3 red and yellow solid, 4 green solid, 5 red and green solid, 6 green and yellow solid, 7 red yellow and green solid
+// 8 NA (All off and flashing), 9 Red Flashing, A yellow flashing, B red and yellow flashing, C green flashing, D Green and Red flashing, E green and yellow flashing, green yellow and red flashing
+
+func Checkstatus() int {
+	//returns the status of the LED's
 	return 0
 }
