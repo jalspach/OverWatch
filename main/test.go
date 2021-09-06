@@ -10,23 +10,6 @@ import (
 
 func main() {
 
-	// ToDo:
-	// Upload data to MQTT (IP Address and temp)
-	// Run network test(s)
-	// Upload data to MQTT (test results)
-	// set the LED's as apropriate (temp or network)
-	//
-	//Based on run type do the above as apropirate
-	//
-	// Set run types
-	// oneoff - test leds, report temprature while doing nextork test? Threads?
-	// continious - test leds, report temp while doing network test, loop over these two
-	// service - skip LED test
-	//
-	// Maybe do this using threads if thats not too much extra work
-	//
-
-
 	leds.Init()
 	//leds.Error(500)
 	//leds.SweepR2G(125)
@@ -34,10 +17,10 @@ func main() {
 	//leds.Test()
 
 	var c float64 = coms.Tempc()
-	fmt.Printf("%f\n", c)
+	fmt.Printf("%f deg C\n", c)
 
 	var f float64 = coms.Tempf()
-	fmt.Printf("%f\n", f)
+	fmt.Printf("%f deg F\n", f)
 
 	coms.Tempc()
 	coms.Tempf()
