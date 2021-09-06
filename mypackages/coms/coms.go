@@ -2,10 +2,9 @@ package coms
 
 import (
 	"fmt"
-	"net/url"
 
 	//mqtt "github.com/eclipse/paho.mqtt.golang"
-	mqtt "github.com/eclipse/paho.mqtt.golang"
+
 	"github.com/yryz/ds18b20"
 )
 
@@ -66,7 +65,7 @@ func Tempsensors() float64 {
 }
 
 //MQTT communications and routines
-
+/*
 //place holders so as not to delete the import :-) taken from https://www.cloudmqtt.com/docs/go.html and https://www.emqx.com/en/blog/how-to-use-mqtt-in-golang
 
 //MQTTInit
@@ -81,7 +80,7 @@ func MQTTconnect(clientId string, uri *url.URL) mqtt.Client {
 	}
 	return client
 }
-*/
+
 func createClientOptions(clientId string, uri *url.URL) *mqtt.ClientOptions {
 	opts := mqtt.NewClientOptions()
 	opts.AddBroker(fmt.Sprintf("tcp://%s", ebcd79b43b7f44a2a105831f0070400a.s1.eu.hivemq.cloud))
