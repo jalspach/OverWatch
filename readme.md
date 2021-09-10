@@ -9,6 +9,16 @@ All of this gets dumped to MQTT for remote monitoring and tranding. This device 
 
 *Hopefully*...if I have read the pages and studied right...this will be a *proper* module (for a project that really doesnt need one but whatever...I am learning here). :-)
 
+## Followed these pages: ##
+
+* Modules 
+    * Need Links
+    * Need links
+* MQTT
+    * https://www.cloudmqtt.com/docs/go.html
+    * https://www.emqx.com/en/blog/how-to-use-mqtt-in-golang
+
+
 ## ToDo: ##
 
 * -[x] module to talk to LED's
