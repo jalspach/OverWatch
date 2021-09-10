@@ -6,8 +6,8 @@ import (
 	"github.com/yryz/ds18b20"
 )
 
-//tewt
-func Test() int {
+//Place holder to keep the include in place
+func Nonop() int {
 	return 0
 }
 

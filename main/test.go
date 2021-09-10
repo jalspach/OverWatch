@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-
+	var client string = "Hostname"
 	leds.Init()
 	//leds.Error(500)
 	//leds.SweepR2G(125)
@@ -29,8 +29,9 @@ func main() {
 
 	leds.DisplayTemp()
 
-	reporting.Noppers()
-	reporting.Report()
+	reporting.Nonop()
+	//seems like I should build a struct that gets populated and passed to report
+	reporting.Report(client, "topic", "value")
 
 	//
 	//

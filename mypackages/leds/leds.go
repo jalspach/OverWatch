@@ -8,6 +8,11 @@ import (
 	"github.com/stianeikeland/go-rpio"
 )
 
+//Place holder to keep the include in place
+func Nonop() int {
+	return 0
+}
+
 //init LEDS - opens the channel and resets LEDS to low.
 func Init() int {
 	fmt.Println("opening gpio")

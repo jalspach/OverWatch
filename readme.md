@@ -17,6 +17,7 @@ All of this gets dumped to MQTT for remote monitoring and tranding. This device 
 * MQTT
     * https://www.cloudmqtt.com/docs/go.html
     * https://www.emqx.com/en/blog/how-to-use-mqtt-in-golang
+    * https://www.eclipse.org/paho/index.php?page=clients/golang/index.php
 
 
 ## ToDo: ##

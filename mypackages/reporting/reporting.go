@@ -9,11 +9,12 @@ import (
 	MQTT "github.com/eclipse/paho.mqtt.golang"
 )
 
-//MQTT communications and routines
-
-func Noppers() {
+//Place holder to keep the include in place
+func Nonop() int {
 	return 0
 }
+
+//MQTT communications and routines
 
 //define a function for the default message handler
 var f MQTT.MessageHandler = func(client MQTT.Client, msg MQTT.Message) {
@@ -21,11 +22,11 @@ var f MQTT.MessageHandler = func(client MQTT.Client, msg MQTT.Message) {
 	fmt.Printf("MSG: %s\n", msg.Payload())
 }
 
-func Report() {
+func Report(clientid, topic, value string) {
 	//create a ClientOptions struct setting the broker address, clientid, turn
 	//off trace output and set the default message handler
 	opts := MQTT.NewClientOptions().AddBroker("tcp://mqtt.eclipseprojects.io:1883")
-	opts.SetClientID("go-simple")
+	opts.SetClientID(clientid)
 	opts.SetDefaultPublishHandler(f)
 
 	//create and start a client using the above ClientOptions
@@ -36,7 +37,7 @@ func Report() {
 
 	//subscribe to the topic /go-mqtt/sample and request messages to be delivered
 	//at a maximum qos of zero, wait for the receipt to confirm the subscription
-	if token := c.Subscribe("go-mqtt/sample", 0, nil); token.Wait() && token.Error() != nil {
+	if token := c.Subscribe(topic, 0, nil); token.Wait() && token.Error() != nil {
 		fmt.Println(token.Error())
 		os.Exit(1)
 	}
@@ -44,15 +45,15 @@ func Report() {
 	//Publish 5 messages to /go-mqtt/sample at qos 1 and wait for the receipt
 	//from the server after sending each message
 	for i := 0; i < 5; i++ {
-		text := fmt.Sprintf("this is msg #%d!", i)
-		token := c.Publish("go-mqtt/sample", 0, false, text)
+		text := fmt.Sprintf(value, i)
+		token := c.Publish(topic, 0, false, text)
 		token.Wait()
 	}
 
 	time.Sleep(3 * time.Second)
 
 	//unsubscribe from /go-mqtt/sample
-	if token := c.Unsubscribe("go-mqtt/sample"); token.Wait() && token.Error() != nil {
+	if token := c.Unsubscribe(clientid); token.Wait() && token.Error() != nil {
 		fmt.Println(token.Error())
 		os.Exit(1)
 	}
