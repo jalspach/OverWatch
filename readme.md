@@ -23,7 +23,7 @@ All of this gets dumped to MQTT for remote monitoring and tranding. This device 
 
 * -[x] package to talk to LED's
 * -[x] package to talk to Temp Sensor
-* -[] package to upload data to MQTT
+* -[] package to upload data to MQTT <- In progress
 * -[] Run network test(s)
 * -[] set the LED's as apropriate (temp or network)	
 * -[] *Maybe do this using threads if thats not too much extra work*

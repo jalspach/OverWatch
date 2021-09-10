@@ -6,8 +6,8 @@ import (
 
 	//"github.com/jalspach/OverWatch/mypackages/coms"
 	"github.com/jalspach/OverWatch/mypackages/leds"
-	"github.com/jalspach/OverWatch/mypackages/reporting"
 	"github.com/jalspach/OverWatch/mypackages/onewire"
+	"github.com/jalspach/OverWatch/mypackages/reporting"
 )
 
 func main() {
@@ -18,20 +18,24 @@ func main() {
 	//leds.SweepG2R(125)
 	//leds.Test()
 
-	var c float64 = onewire.Tempc()
-	fmt.Printf("%f deg C\n", c)
+	var cdeg float64 = onewire.Tempc()
+	fmt.Printf("%fdeg deg C\n", cdeg)
 
-	var f float64 = onewire.Tempf()
-	fmt.Printf("%f deg F\n", f)
+	var fdeg float64 = onewire.Tempf()
+	fmt.Printf("%Fdeg deg F\n", fdeg)
 
 	onewire.Tempc()
 	onewire.Tempf()
 
 	leds.DisplayTemp()
+
+	reporting.Noppers()
+	reporting.Report()
+
+	//
+	//
+	//
+
 	time.Sleep(10 * time.Second)
 	leds.Init()
-
-	var f MQTT.MessageHandler = 
-
-
 }
