@@ -12,7 +12,7 @@ All of this gets dumped to MQTT for remote monitoring and tranding. This device 
 ## Followed these pages: ##
 
 * Modules 
-    * Need Links
+    * https://golangbyexample.com/package-vs-module-golang/
     * Need links
 * MQTT
     * https://www.cloudmqtt.com/docs/go.html
@@ -21,11 +21,10 @@ All of this gets dumped to MQTT for remote monitoring and tranding. This device 
 
 ## ToDo: ##
 
-* -[x] module to talk to LED's
-* -[x] module to talk to Temp Sensor
-* -[] Upload data to MQTT (IP Address and temp)
+* -[x] package to talk to LED's
+* -[x] package to talk to Temp Sensor
+* -[] package to upload data to MQTT
 * -[] Run network test(s)
-* -[] Upload data to MQTT (test results)
 * -[] set the LED's as apropriate (temp or network)	
 * -[] *Maybe do this using threads if thats not too much extra work*
 

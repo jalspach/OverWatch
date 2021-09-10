@@ -6,7 +6,7 @@ import (
 
 	//"github.com/jalspach/OverWatch/mypackages/coms"
 	"github.com/jalspach/OverWatch/mypackages/leds"
-	"github.com/jalspach/OverWatch/mypackages/mqtt"
+	"github.com/jalspach/OverWatch/mypackages/reporting"
 	"github.com/jalspach/OverWatch/mypackages/onewire"
 )
 
@@ -31,6 +31,7 @@ func main() {
 	time.Sleep(10 * time.Second)
 	leds.Init()
 
-	mqtt.Init()
+	var f MQTT.MessageHandler = 
+
 
 }
