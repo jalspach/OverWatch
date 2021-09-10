@@ -1,18 +1,18 @@
 package mqtt
 
 import (
-	"fmt"
+	"log"
+	"net/url"
+	"time"
 
 	mqtt "github.com/eclipse/paho.mqtt.golang"
-
 )
-
 
 //MQTT communications and routines
 
 //place holders so as not to delete the import :-) taken from https://www.cloudmqtt.com/docs/go.html and https://www.emqx.com/en/blog/how-to-use-mqtt-in-golang
 
-MQTTInit
+//MQTTInit
 func Init(clientId string, uri *url.URL) mqtt.Client {
 	opts := createClientOptions(clientId, uri)
 	client := mqtt.NewClient(opts)

@@ -3,10 +3,11 @@ package main
 import (
 	"fmt"
 	"time"
-	"github.com/jalspach/OverWatch/mypackages/1wire"
-	"github.com/jalspach/OverWatch/mypackages/mqtt"
-	"github.com/jalspach/OverWatch/mypackages/coms"
+
+	//"github.com/jalspach/OverWatch/mypackages/coms"
 	"github.com/jalspach/OverWatch/mypackages/leds"
+	"github.com/jalspach/OverWatch/mypackages/mqtt"
+	"github.com/jalspach/OverWatch/mypackages/onewire"
 )
 
 func main() {
@@ -17,18 +18,19 @@ func main() {
 	//leds.SweepG2R(125)
 	//leds.Test()
 
-	var c float64 = coms.Tempc()
+	var c float64 = onewire.Tempc()
 	fmt.Printf("%f deg C\n", c)
 
-	var f float64 = coms.Tempf()
+	var f float64 = onewire.Tempf()
 	fmt.Printf("%f deg F\n", f)
 
-	coms.Tempc()
-	coms.Tempf()
+	onewire.Tempc()
+	onewire.Tempf()
 
 	leds.DisplayTemp()
 	time.Sleep(10 * time.Second)
 	leds.Init()
 
+	mqtt.Init()
 
 }

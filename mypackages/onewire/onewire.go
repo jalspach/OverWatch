@@ -1,10 +1,11 @@
-package 1wire
+package onewire
 
 import (
 	"fmt"
 
 	"github.com/yryz/ds18b20"
 )
+
 //tewt
 func Test() int {
 	return 0

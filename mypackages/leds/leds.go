@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/jalspach/OverWatch/mypackages/coms"
+	"github.com/jalspach/OverWatch/mypackages/onewire"
 	"github.com/stianeikeland/go-rpio"
 )
 
@@ -279,7 +279,7 @@ func Test() int {
 //Display Temprature on LED's
 func DisplayTemp() int {
 	//coms.Listb20s()
-	var c float64 = coms.Tempc()
+	var c float64 = onewire.Tempc()
 	//fmt.Printf("%f\n", c)
 
 	f := c/(.556) + 32
