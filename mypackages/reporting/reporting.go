@@ -22,7 +22,8 @@ var f MQTT.MessageHandler = func(client MQTT.Client, msg MQTT.Message) {
 	fmt.Printf("MSG: %s\n", msg.Payload())
 }
 
-func Report(clientid, topic, value string) {
+// publishes a single message to MQTT
+func Publish(clientid, topic, value string, qos byte) {
 	//create a ClientOptions struct setting the broker address, clientid, turn
 	//off trace output and set the default message handler
 	opts := MQTT.NewClientOptions().AddBroker("tcp://mqtt.eclipseprojects.io:1883")
@@ -42,13 +43,11 @@ func Report(clientid, topic, value string) {
 		os.Exit(1)
 	}
 
-	//Publish 5 messages to /go-mqtt/sample at qos 1 and wait for the receipt
+	//Publish message value to topic at qos and wait for the receipt
 	//from the server after sending each message
-	for i := 0; i < 5; i++ {
-		text := fmt.Sprintf(value, i)
-		token := c.Publish(topic, 0, false, text)
-		token.Wait()
-	}
+
+	token := c.Publish(topic, qos, false, value)
+	token.Wait()
 
 	time.Sleep(3 * time.Second)
 

@@ -18,16 +18,22 @@ All of this gets dumped to MQTT for remote monitoring and tranding. This device 
     * https://www.cloudmqtt.com/docs/go.html
     * https://www.emqx.com/en/blog/how-to-use-mqtt-in-golang
     * https://www.eclipse.org/paho/index.php?page=clients/golang/index.php
+    * http://mqtt-explorer.com/
+* 1wire
+    * Add
+    * Add
 
 
 ## ToDo: ##
 
 * -[x] package to talk to LED's
 * -[x] package to talk to Temp Sensor
-* -[] package to upload data to MQTT <- In progress
+* -[x] package to upload data to MQTT
+* -[] Get IP address
 * -[] Run network test(s)
 * -[] set the LED's as apropriate (temp or network)	
 * -[] *Maybe do this using threads if thats not too much extra work*
+* -[] build run types like /systemtest /oneoff 
 
 Based on run type (below) do the above as apropirate
 	
