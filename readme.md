@@ -22,6 +22,8 @@ All of this gets dumped to MQTT for remote monitoring and tranding. This device 
 * 1wire
     * Add
     * Add
+* Utils
+    * https://gist.github.com/schwarzeni/f25031a3123f895ff3785970921e962c#file-util-go
 
 
 ## ToDo: ##

@@ -31,6 +31,12 @@ func Publiship(client, basetopic string) int {
 	return 0
 }
 
+func PublishPortcheck(client, basetopic, targethost, targetport string) int {
+	ipaddr, _ := util.GetInterfaceIpv4Addr("eth0")
+	reporting.Publish(client, basetopic+"ip_address", ipaddr, 0)
+	return 0
+}
+
 func main() {
 	client, err := os.Hostname()
 	if err != nil {

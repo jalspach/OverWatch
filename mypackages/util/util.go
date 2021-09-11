@@ -55,3 +55,12 @@ func GetInterfaceIpv4Addr(interfaceName string) (addr string, err error) {
     }
     return ipv4Addr.String(), nil
 }
+func Portcheck (host, port string ) {
+timeout := time.Duration(1 * time.Second)
+_, err := net.DialTimeout("tcp", host+":"+port, timeout)
+if err != nil {
+	fmt.Printf("%s %s %s\n", host, "not responding", err.Error())
+} else {
+	fmt.Printf("%s %s %s\n", host, "responding on port:", port)
+}
+}
