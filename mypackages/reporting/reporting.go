@@ -49,7 +49,7 @@ func Publish(clientid, topic, value string, qos byte) {
 	token := c.Publish(topic, qos, false, value)
 	token.Wait()
 
-	time.Sleep(3 * time.Second)
+	time.Sleep(0 * time.Second)
 
 	//unsubscribe from /go-mqtt/sample
 	if token := c.Unsubscribe(clientid); token.Wait() && token.Error() != nil {
