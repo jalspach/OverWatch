@@ -13,14 +13,12 @@ import (
 	"github.com/jalspach/OverWatch/mypackages/util"
 )
 
-// Publishes the deg F to MQTT
+// Publishes the deg F to MQTT (checks 3 times and send the middle)
 func PublishTempF(client string, basetopic string, qos byte) int {
 	t1 := onewire.Tempf()
 	t2 := onewire.Tempf()
 	t3 := onewire.Tempf()
-
 	temp := math.Max(math.Min(t1, t2), math.Min(math.Max(t1, t2), t3))
-
 	reporting.Publish(client, basetopic+"Temperature", fmt.Sprintf("%.2f", temp), qos)
 	return 0
 }

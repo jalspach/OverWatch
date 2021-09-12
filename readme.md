@@ -32,10 +32,11 @@ All of this gets dumped to MQTT for remote monitoring and tranding. This device 
 
 ## ToDo: ##
 
-* -[x] package to talk to LED's
-* -[x] package to talk to Temp Sensor
-* -[x] package to upload data to MQTT
-* -[x] Get IP address
+* -[x] Module to talk to LED's
+* -[x] Module to talk to Temp Sensor - Random temp spikes messed up graphing so I now check 3 times and keep the middle one.
+* -[x] Module to upload data to MQTT
+* -[x] Get internal IP address
+* -[] Get external address
 * -[] Run network test(s) <- smple version. Need to use the origional output but figure out how to shrink it into one variable
 * -[] set the LED's as apropriate (temp or network)	
 * -[] *Maybe do this using goroutines if thats not too much extra work* <- EZ PEASY so far 
