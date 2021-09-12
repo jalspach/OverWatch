@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"os"
 	"time"
 
@@ -14,15 +15,20 @@ import (
 
 // Publishes the deg F to MQTT
 func PublishTempF(client string, basetopic string, qos byte) int {
-	temp := fmt.Sprintf("%.2f", onewire.Tempf())
-	reporting.Publish(client, basetopic+"Temperature", temp, qos)
+	t1 := onewire.Tempf()
+	t2 := onewire.Tempf()
+	t3 := onewire.Tempf()
+
+	temp := math.Max(math.Min(t1, t2), math.Min(math.Max(t1, t2), t3))
+
+	reporting.Publish(client, basetopic+"Temperature", fmt.Sprintf("%.2f", temp), qos)
 	return 0
 }
 
 //Figureout our IPv4 address and publish it to MQTT
 func PublishIP(client string, basetopic string, qos byte) int {
 	ipaddr, _ := util.GetInterfaceIpv4Addr("eth0")
-	reporting.Publish(client, basetopic+"ip_address", ipaddr, qos)
+	reporting.Publish(client, basetopic+"IPAddress", ipaddr, qos)
 	return 0
 }
 
@@ -93,4 +99,5 @@ func main() {
 
 	time.Sleep(10 * time.Second)
 	leds.Init()
+
 }
