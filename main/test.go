@@ -12,22 +12,49 @@ import (
 	"github.com/jalspach/OverWatch/mypackages/util"
 )
 
-// Publishes the deg F
+// Publishes the deg F to MQTT
 func PublishTempF(client, basetopic string) int {
 	temp := fmt.Sprintf("%.2f", onewire.Tempf())
 	reporting.Publish(client, basetopic+"Temperature", temp, 0)
 	return 0
 }
 
+//Figureout our IPv4 address and publish it to MQTT
 func PublishIP(client, basetopic string) int {
 	ipaddr, _ := util.GetInterfaceIpv4Addr("eth0")
 	reporting.Publish(client, basetopic+"ip_address", ipaddr, 0)
 	return 0
 }
 
-func PublishPortCheck(client, basetopic, targethost, targetport string) int {
+//test to a port at a server and publish that to MQTT
+func PublishSimplePortCheck(client, basetopic, targethost, targetport string) int {
 	portstatus := util.PortCheckSimple(targethost, targetport)
 	reporting.Publish(client, basetopic+"PortCheck", portstatus, 0)
+	return 0
+}
+
+//Display Temprature on LED's
+func DisplayTemp() int {
+	//coms.Listb20s()
+	var f float64 = onewire.Tempf()
+	//fmt.Printf("%f\n", f)
+
+	switch {
+	case f > 100:
+		leds.Setstatus(0x_1)
+	case f > 90:
+		leds.Setstatus(0x_3)
+	case f > 84:
+		leds.Setstatus(0x_6)
+	case f > 75:
+		leds.Setstatus(0x_4)
+	case f > 68:
+		leds.Setstatus(0x_6)
+	case f > 60:
+		leds.Setstatus(0x_3)
+	default:
+		leds.Setstatus(0x_1)
+	}
 	return 0
 }
 
@@ -59,12 +86,12 @@ func main() {
 	//	temp := fmt.Sprintf("%v", onewire.Tempf())
 	//	value = temp
 
-	leds.DisplayTemp()
+	DisplayTemp()
 
 	//seems like I should build a struct that gets populated and passed to report
 	PublishTempF(client, basetopic)
 	PublishIP(client, basetopic)
-	PublishPortCheck(client, basetopic, targethost, targetport)
+	PublishSimplePortCheck(client, basetopic, targethost, targetport)
 	//util.PortCheck("www.slashdot.org", "80")
 
 	// reporting.Publish(client, topic, value, qos)

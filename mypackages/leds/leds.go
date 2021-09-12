@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/jalspach/OverWatch/mypackages/onewire"
 	"github.com/stianeikeland/go-rpio"
 )
 
@@ -277,33 +276,6 @@ func Test() int {
 		Setstatus(x)
 		time.Sleep(time.Second * 1)
 
-	}
-	return 0
-}
-
-//Display Temprature on LED's
-func DisplayTemp() int {
-	//coms.Listb20s()
-	var c float64 = onewire.Tempc()
-	//fmt.Printf("%f\n", c)
-
-	f := c/(.556) + 32
-	//fmt.Printf("%f\n", f)
-	switch {
-	case f > 100:
-		Setstatus(0x_1)
-	case f > 90:
-		Setstatus(0x_3)
-	case f > 84:
-		Setstatus(0x_6)
-	case f > 75:
-		Setstatus(0x_4)
-	case f > 68:
-		Setstatus(0x_6)
-	case f > 60:
-		Setstatus(0x_3)
-	default:
-		Setstatus(0x_1)
 	}
 	return 0
 }
