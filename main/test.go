@@ -13,27 +13,21 @@ import (
 )
 
 // Publishes the deg F
-func Publishtempf(client, basetopic string) int {
+func PublishTempF(client, basetopic string) int {
 	temp := fmt.Sprintf("%.2f", onewire.Tempf())
 	reporting.Publish(client, basetopic+"Temperature", temp, 0)
 	return 0
 }
 
-/* func Publiship1(client, basetopic string) int {
-	ipaddr := util.GetOutboundIP()
-	reporting.Publish(client, basetopic+"ip_address1", string(ipaddr), 0)
-	return 0
-} */
-
-func Publiship(client, basetopic string) int {
+func PublishIP(client, basetopic string) int {
 	ipaddr, _ := util.GetInterfaceIpv4Addr("eth0")
 	reporting.Publish(client, basetopic+"ip_address", ipaddr, 0)
 	return 0
 }
 
-func PublishPortcheck(client, basetopic, targethost, targetport string) int {
-	ipaddr, _ := util.GetInterfaceIpv4Addr("eth0")
-	reporting.Publish(client, basetopic+"ip_address", ipaddr, 0)
+func PublishPortCheck(client, basetopic, targethost, targetport string) int {
+	portstatus := util.PortCheckSimple(targethost, targetport)
+	reporting.Publish(client, basetopic+"PortCheck", portstatus, 0)
 	return 0
 }
 
@@ -42,7 +36,8 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-
+	var targethost string = "slashdot.org"
+	var targetport string = "443"
 	var basetopic string = "home/frontroom/" + client + "/"
 	//	var topic string = "topic"
 	//	var qos byte = 0
@@ -67,8 +62,10 @@ func main() {
 	leds.DisplayTemp()
 
 	//seems like I should build a struct that gets populated and passed to report
-	Publishtempf(client, basetopic)
-	Publiship(client, basetopic)
+	PublishTempF(client, basetopic)
+	PublishIP(client, basetopic)
+	PublishPortCheck(client, basetopic, targethost, targetport)
+	//util.PortCheck("www.slashdot.org", "80")
 
 	// reporting.Publish(client, topic, value, qos)
 
