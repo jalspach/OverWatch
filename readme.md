@@ -24,6 +24,10 @@ All of this gets dumped to MQTT for remote monitoring and tranding. This device 
     * Add
 * Utils
     * https://gist.github.com/schwarzeni/f25031a3123f895ff3785970921e962c#file-util-go
+* Go routines
+    * https://www.geeksforgeeks.org/goroutines-concurrency-in-golang/
+    * https://go.dev/blog/context
+    * https://pkg.go.dev/context
 
 
 ## ToDo: ##
@@ -31,11 +35,12 @@ All of this gets dumped to MQTT for remote monitoring and tranding. This device 
 * -[x] package to talk to LED's
 * -[x] package to talk to Temp Sensor
 * -[x] package to upload data to MQTT
-* -[] Get IP address
-* -[] Run network test(s)
+* -[x] Get IP address
+* -[] Run network test(s) <- smple version. Need to use the origional output but figure out how to shrink it into one variable
 * -[] set the LED's as apropriate (temp or network)	
-* -[] *Maybe do this using threads if thats not too much extra work*
+* -[] *Maybe do this using goroutines if thats not too much extra work* <- EZ PEASY so far 
 * -[] build run types like /systemtest /oneoff 
+* -[] add MQTT Tombstone per example in Hive binder I have
 
 Based on run type (below) do the above as apropirate
 	
