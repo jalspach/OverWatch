@@ -30,10 +30,17 @@ func PublishIP(client string, basetopic string, qos byte) int {
 	return 0
 }
 
-//test to a port at a server and publish that to MQTT
-func PublishSimplePortCheck(client string, basetopic string, targethost string, targetport string, qos byte) int {
-	portstatus := util.PortCheckSimple(targethost, targetport)
+//test to a port at a server and publish that to MQTT. Sends txt to represnet status
+func PublishSimplePortCheckTxt(client string, basetopic string, targethost string, targetport string, qos byte) int {
+	portstatus := util.PortCheckSimpleTxt(targethost, targetport)
 	reporting.Publish(client, basetopic+"PortCheck", portstatus, qos)
+	return 0
+}
+
+//test to a port at a server and publish that to MQTT. Sends 0 or 1 to rep status
+func PublishSimplePortCheckBool(client string, basetopic string, targethost string, targetport string, qos byte) int {
+	portstatus := util.PortCheckSimpleBool(targethost, targetport)
+	reporting.Publish(client, basetopic+"HostPortUp", portstatus, qos)
 	return 0
 }
 
@@ -91,7 +98,8 @@ func main() {
 	go leds.SweepG2R(65)
 	PublishTempF(client, basetopic, qos)
 	PublishIP(client, basetopic, qos)
-	PublishSimplePortCheck(client, basetopic, targethost, targetport, qos)
+	PublishSimplePortCheckTxt(client, basetopic, targethost, targetport, qos)
+	PublishSimplePortCheckBool(client, basetopic, targethost, targetport, qos)
 	leds.Setstatus(0)
 	DisplayTemp()
 

@@ -51,7 +51,7 @@ func GetInterfaceIpv4Addr(interfaceName string) (addr string, err error) {
 }
 
 //checks to see if a port "picks up"
-func PortCheckSimple(host, port string) string {
+func PortCheckSimpleTxt(host, port string) string {
 	timeout := time.Duration(1 * time.Second)
 	_, err := net.DialTimeout("tcp", host+":"+port, timeout)
 	if err != nil {
@@ -60,5 +60,17 @@ func PortCheckSimple(host, port string) string {
 	} else {
 		//fmt.Printf("%s %s %s\n", host, "responding on port:", port)
 		return "responding on port"
+	}
+}
+
+func PortCheckSimpleBool(host, port string) string {
+	timeout := time.Duration(1 * time.Second)
+	_, err := net.DialTimeout("tcp", host+":"+port, timeout)
+	if err != nil {
+		//fmt.Printf("%s %s %s\n", host, "not responding", err.Error())
+		return "0"
+	} else {
+		//fmt.Printf("%s %s %s\n", host, "responding on port:", port)
+		return "1"
 	}
 }

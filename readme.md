@@ -37,7 +37,7 @@ All of this gets dumped to MQTT for remote monitoring and tranding. This device 
 * -[x] Module to upload data to MQTT
 * -[x] Get internal IP address
 * -[] Get external address
-* -[] Run network test(s) <- smple version. Need to use the origional output but figure out how to shrink it into one variable
+* -[] Run network test(s) <- smple version. Need to use the origional output but figure out how to shrink it into one variable. Good test would be to report on packet loss.
 * -[] set the LED's as apropriate (temp or network)	
 * -[] *Maybe do this using goroutines if thats not too much extra work* <- EZ PEASY so far 
 * -[] build run types like /systemtest /oneoff 
