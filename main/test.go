@@ -93,6 +93,7 @@ func main() {
 	var fdeg float64 = onewire.Tempf()
 	fmt.Printf("%Fdeg deg F\n", fdeg)
 
+	util.CheckAQI("15471")
 	//seems like I should build a struct that gets populated and passed to publish events
 
 	go leds.SweepG2R(65)

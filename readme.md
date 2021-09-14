@@ -24,6 +24,8 @@ All of this gets dumped to MQTT for remote monitoring and tranding. This device 
     * Add
 * Utils
     * https://gist.github.com/schwarzeni/f25031a3123f895ff3785970921e962c#file-util-go
+    * https://pkg.go.dev/github.com/sparrc/go-ping#readme-installation
+    * https://github.com/garethpaul/purpleair-go/blob/master/results.go
 * Go routines
     * https://www.geeksforgeeks.org/goroutines-concurrency-in-golang/
     * https://go.dev/blog/context
@@ -40,7 +42,7 @@ All of this gets dumped to MQTT for remote monitoring and tranding. This device 
 * -[] Run network test(s) <- smple version. Need to use the origional output but figure out how to shrink it into one variable. Good test would be to report on packet loss.
 * -[] set the LED's as apropriate (temp or network)	
 * -[] *Maybe do this using goroutines if thats not too much extra work* <- EZ PEASY so far 
-* -[] build run types like /systemtest /oneoff 
+* -[] build run types
 * -[] add MQTT Tombstone per example in Hive binder I have
 
 Based on run type (below) do the above as apropirate

@@ -4,6 +4,8 @@ import (
 	"log"
 	"net"
 
+	"github.com/garethpaul/purpleair-go"
+
 	//"os"
 	"fmt"
 	"time"
@@ -72,5 +74,13 @@ func PortCheckSimpleBool(host, port string) string {
 	} else {
 		//fmt.Printf("%s %s %s\n", host, "responding on port:", port)
 		return "1"
+	}
+}
+
+func CheckAQI(sensor string) {
+	client := purpleair.NewClient()
+	s := client.Sensor(sensor)
+	for i := 0; i < len(s.Results); i++ {
+		fmt.Println("Air Quality: " + s.Results[i].PM25Value)
 	}
 }
