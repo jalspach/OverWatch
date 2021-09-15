@@ -69,6 +69,13 @@ func DisplayTemp() int {
 	return 0
 }
 
+//publish AQI
+func PublishAQI1(client string, basetopic string, sensor string, qos byte) int {
+	aqi := util.CheckAQI(sensor)
+	reporting.Publish(client, basetopic+"HostPortUp", aqi, qos)
+	return 0
+}
+
 func main() {
 	//setups
 	client, err := os.Hostname()
@@ -77,8 +84,9 @@ func main() {
 	}
 	var targethost string = "slashdot.org"
 	var targetport string = "443"
-	var basetopic string = "home/frontroom/" + client + "/"
+	var basetopic string = "OverWatch/SCOE/JamesOffice/" + client + "/"
 	var qos byte = 0
+	var sensor string = "15471"
 
 	//startin
 	leds.Init()
@@ -93,7 +101,8 @@ func main() {
 	var fdeg float64 = onewire.Tempf()
 	fmt.Printf("%Fdeg deg F\n", fdeg)
 
-	util.CheckAQI("15471")
+	util.CheckAQI(sensor)
+
 	//seems like I should build a struct that gets populated and passed to publish events
 
 	go leds.SweepG2R(65)
@@ -101,6 +110,7 @@ func main() {
 	PublishIP(client, basetopic, qos)
 	PublishSimplePortCheckTxt(client, basetopic, targethost, targetport, qos)
 	PublishSimplePortCheckBool(client, basetopic, targethost, targetport, qos)
+	PublishAQI1(client, basetopic, sensor, qos)
 	leds.Setstatus(0)
 	DisplayTemp()
 

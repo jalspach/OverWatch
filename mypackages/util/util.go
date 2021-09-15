@@ -77,10 +77,20 @@ func PortCheckSimpleBool(host, port string) string {
 	}
 }
 
-func CheckAQI(sensor string) {
+func CheckAQI(sensor string) string {
 	client := purpleair.NewClient()
 	s := client.Sensor(sensor)
 	for i := 0; i < len(s.Results); i++ {
 		fmt.Println("Air Quality: " + s.Results[i].PM25Value)
 	}
+	return "all good"
+}
+
+func CheckAQI1(sensor string) string {
+	client := purpleair.NewClient()
+	s := client.Sensor(sensor)
+	for i := 0; i < len(s.Results); i++ {
+		fmt.Println("Air Quality:" + s.Results[0].PM25Value)
+	}
+	return "all good"
 }

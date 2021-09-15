@@ -44,6 +44,8 @@ All of this gets dumped to MQTT for remote monitoring and tranding. This device 
 * -[] *Maybe do this using goroutines if thats not too much extra work* <- EZ PEASY so far 
 * -[] build run types
 * -[] add MQTT Tombstone per example in Hive binder I have
+* -[] Pull specifics from env or local file (allows it to run from work or home easily)
+* -[] pull  clienname (topic) in code
 
 Based on run type (below) do the above as apropirate
 	
