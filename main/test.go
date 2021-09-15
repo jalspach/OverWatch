@@ -84,7 +84,7 @@ func main() {
 	}
 	var targethost string = "slashdot.org"
 	var targetport string = "443"
-	var basetopic string = "OverWatch/SCOE/JamesOffice/" + client + "/"
+	var basetopic string = "overwatch/home/frontroom/" + client + "/"
 	var qos byte = 0
 	var sensor string = "15471"
 
