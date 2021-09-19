@@ -69,10 +69,17 @@ func DisplayTemp() int {
 	return 0
 }
 
-//publish AQI
-func PublishAQI1(client string, basetopic string, sensor string, qos byte) int {
+//publish AQI1
+func PublishAQI(client string, basetopic string, sensor string, qos byte) int {
 	aqi := util.CheckAQI(sensor)
-	reporting.Publish(client, basetopic+"HostPortUp", aqi, qos)
+	reporting.Publish(client, basetopic+"AQI", aqi, qos)
+	return 0
+}
+
+//publish AQI1
+func PublishAQI1(client string, basetopic string, sensor string, qos byte) int {
+	aqi := util.CheckAQI1(sensor)
+	reporting.Publish(client, basetopic+"AQI1", aqi, qos)
 	return 0
 }
 
@@ -110,6 +117,7 @@ func main() {
 	PublishIP(client, basetopic, qos)
 	PublishSimplePortCheckTxt(client, basetopic, targethost, targetport, qos)
 	PublishSimplePortCheckBool(client, basetopic, targethost, targetport, qos)
+	//PublishAQI(client, basetopic, sensor, qos)
 	PublishAQI1(client, basetopic, sensor, qos)
 	leds.Setstatus(0)
 	DisplayTemp()

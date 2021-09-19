@@ -89,8 +89,5 @@ func CheckAQI(sensor string) string {
 func CheckAQI1(sensor string) string {
 	client := purpleair.NewClient()
 	s := client.Sensor(sensor)
-	for i := 0; i < len(s.Results); i++ {
-		fmt.Println("Air Quality:" + s.Results[0].PM25Value)
-	}
-	return "all good"
+	return s.Results[0].PM25Value
 }
