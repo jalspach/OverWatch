@@ -79,7 +79,7 @@ func PublishAQI(client string, basetopic string, sensor string, qos byte) int {
 //publish AQI1
 func PublishAQI1(client string, basetopic string, sensor string, qos byte) int {
 	aqi := util.CheckAQI1(sensor)
-	reporting.Publish(client, basetopic+"AQI1", aqi, qos)
+	reporting.Publish(client, basetopic+sensor+"/AQI", aqi, qos)
 	return 0
 }
 
@@ -91,7 +91,7 @@ func main() {
 	}
 	var targethost string = "slashdot.org"
 	var targetport string = "443"
-	var basetopic string = "overwatch/home/frontroom/" + client + "/"
+	var basetopic string = "OverWatch/Home/Frontroom/" + client + "/"
 	var qos byte = 0
 	var sensor string = "15471"
 
