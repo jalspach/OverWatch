@@ -26,7 +26,7 @@ All of this gets dumped to MQTT for remote monitoring and tranding. This device 
     * https://gist.github.com/schwarzeni/f25031a3123f895ff3785970921e962c#file-util-go
     * https://pkg.go.dev/github.com/sparrc/go-ping#readme-installation
     * https://github.com/garethpaul/purpleair-go/blob/master/results.go
-* Go routines
+* Go routines / packages
     * https://www.geeksforgeeks.org/goroutines-concurrency-in-golang/
     * https://go.dev/blog/context
     * https://pkg.go.dev/context
@@ -46,6 +46,7 @@ All of this gets dumped to MQTT for remote monitoring and tranding. This device 
 * -[] add MQTT Tombstone per example in Hive binder I have
 * -[] Pull specifics from env or local file (allows it to run from work or home easily)
 * -[] pull  clienname (topic) in code
+* -[] add PurpleAir package
 
 Based on run type (below) do the above as apropirate
 	
