@@ -53,3 +53,33 @@ func GetType(sensor string) string {
 	s := client.Sensor(sensor)
 	return s.Results[0].Type
 }
+
+//Returns the label based on the sensor ID provided
+func GetHidden(sensor string) string {
+	client := purpleair.NewClient()
+	s := client.Sensor(sensor)
+	return s.Results[0].Hidden
+}
+
+//Returns the label based on the sensor ID provided
+func GetVersion(sensor string) string {
+	client := purpleair.NewClient()
+	s := client.Sensor(sensor)
+	return s.Results[0].Version
+}
+
+//Returns the label based on the sensor ID provided
+func GetLastUpdateCheck(sensor string) string {
+	client := purpleair.NewClient()
+	s := client.Sensor(sensor)
+	return s.Results[0].LastUpdateCheck
+}
+
+//Returns the label based on the sensor ID provided
+func GetCreated(sensor string) string {
+	client := purpleair.NewClient()
+	s := client.Sensor(sensor)
+	return s.Results[0].Created
+}
+
+
