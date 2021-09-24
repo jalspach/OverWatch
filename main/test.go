@@ -83,6 +83,13 @@ func PublishAQI1(client string, basetopic string, sensor string, qos byte) int {
 	return 0
 }
 
+/* //publish AQI1
+func PublishCurrentTime(client string, basetopic string, qos byte) int {
+	curtime := util.CurrentTime()
+	reporting.Publish(client, basetopic+"Time",curtime, qos)
+	return 0
+} */
+
 func main() {
 	//setups
 	client, err := os.Hostname()
@@ -91,9 +98,9 @@ func main() {
 	}
 	var targethost string = "slashdot.org"
 	var targetport string = "443"
-	var basetopic string = "OverWatch/Home/Frontroom/" + client + "/"
+	var basetopic string = "OverWatch/SCOE/JamesOffice/" + client + "/"
 	var qos byte = 0
-	var sensor string = "15471"
+	var sensor string = "8058"
 
 	//startin
 	leds.Init()

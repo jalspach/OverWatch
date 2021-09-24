@@ -91,3 +91,8 @@ func CheckAQI1(sensor string) string {
 	s := client.Sensor(sensor)
 	return s.Results[0].PM25Value
 }
+
+/* func CurrentTime() {
+	currenttime := time.Now()
+ fmt.Println(currentTime.String())
+} */
