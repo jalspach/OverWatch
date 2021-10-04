@@ -212,7 +212,50 @@ func Setthinking() int {
 	return 0
 }
 
-//Sweep the LEDS from Red to Green using the dwell time (in milliseconds)
+//Sweep the LEDS a direction (1 = G to R, 2 = R to G) using the duration (number of cycles) and dwell time (in milliseconds). Default direction is G -> R
+func Sweep(dwell, direction, duration int) int {
+	Setstatus(0x0)
+	switch direction {
+	case 1:
+		{
+			for x := 0; x < duration; x++ {
+				Setstatus(0x1)
+				time.Sleep(time.Duration(dwell) * time.Millisecond)
+				Setstatus(0x2)
+				time.Sleep(time.Duration(dwell) * time.Millisecond)
+				Setstatus(0x4)
+				time.Sleep(time.Duration(dwell) * time.Millisecond)
+			}
+			return 0
+		}
+	case 2:
+		{
+			for x := 0; x < duration; x++ {
+				Setstatus(0x4)
+				time.Sleep(time.Duration(dwell) * time.Millisecond)
+				Setstatus(0x2)
+				time.Sleep(time.Duration(dwell) * time.Millisecond)
+				Setstatus(0x1)
+				time.Sleep(time.Duration(dwell) * time.Millisecond)
+			}
+			return 0
+		}
+	default:
+		{
+			for x := 0; x < duration; x++ {
+				Setstatus(0x1)
+				time.Sleep(time.Duration(dwell) * time.Millisecond)
+				Setstatus(0x2)
+				time.Sleep(time.Duration(dwell) * time.Millisecond)
+				Setstatus(0x4)
+				time.Sleep(time.Duration(dwell) * time.Millisecond)
+			}
+			return 0
+		}
+	}
+}
+
+/* //Sweep the LEDS from Red to Green using the dwell time (in milliseconds)
 func SweepR2G(dwell int) int {
 	Setstatus(0x0)
 	for x := 0; x < 10; x++ {
@@ -240,7 +283,7 @@ func SweepG2R(dwell int) int {
 	}
 	Setstatus(0x0)
 	return 0
-}
+} */
 
 // Displays an error combo of flashing leds using the dwell time (in milliseconds)
 func Error(dwell int) int {

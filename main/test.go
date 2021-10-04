@@ -119,7 +119,7 @@ func main() {
 
 	//seems like I should build a struct that gets populated and passed to publish events
 
-	go leds.SweepG2R(65)
+	go leds.Sweep(65, 1, 10)
 	PublishTempF(client, basetopic, qos)
 	PublishIP(client, basetopic, qos)
 	PublishSimplePortCheckTxt(client, basetopic, targethost, targetport, qos)
