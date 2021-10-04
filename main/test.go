@@ -97,13 +97,11 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	var wg sync.WaitGroup
-	wg.Add(1)
 
 	// defaults
 	var targethost string = "slashdot.org"
 	var targetport string = "443"
-	var basetopic string = "OverWatch/SCOE/JamesOffice/" + client + "/"
+	var basetopic string = "OverWatch/Home/FrontRoom/" + client + "/"
 	var qos byte = 0
 	var sensor string = "8058"
 
@@ -114,29 +112,17 @@ func main() {
 	//leds.SweepG2R(125)
 	//leds.Test()
 
-	var cdeg float64 = onewire.Tempc()
-	fmt.Printf("%fdeg deg C\n", cdeg)
-
-	var fdeg float64 = onewire.Tempf()
-	fmt.Printf("%Fdeg deg F\n", fdeg)
-
+	var wg sync.WaitGroup
+	wg.Add(1)
+	//seems like I should build a struct that gets populated and passed to publish events
 	c1 := make(chan string, 1)
 	go func() {
-		util.CheckAQI(sensor)
-		c1 <- "1 finished on time"
-	}()
-
-	select {
-	case res := <-c1:
-		fmt.Println(res)
-	case <-time.After(3 * time.Second):
-		fmt.Println("timeout 1")
-	}
-
-	//seems like I should build a struct that gets populated and passed to publish events
-	c2 := make(chan string, 1)
-	go func() {
 		defer wg.Done()
+		var cdeg float64 = onewire.Tempc()
+		fmt.Printf("%fdeg deg C\n", cdeg)
+		var fdeg float64 = onewire.Tempf()
+		fmt.Printf("%Fdeg deg F\n", fdeg)
+		util.CheckAQI(sensor)
 		leds.Sweep(65, 1, 10)
 		PublishTempF(client, basetopic, qos)
 		PublishIP(client, basetopic, qos)
@@ -144,15 +130,15 @@ func main() {
 		PublishSimplePortCheckBool(client, basetopic, targethost, targetport, qos)
 		//PublishAQI(client, basetopic, sensor, qos)
 		PublishAQI1(client, basetopic, sensor, qos)
-		leds.Setstatus(0)
-		c2 <- "2 Finished on time"
+		c1 <- "1 Finished on time"
 	}()
+	leds.Setstatus(0)
 	DisplayTemp()
 	select {
-	case res := <-c2:
+	case res := <-c1:
 		fmt.Println(res)
 	case <-time.After(10 * time.Second):
-		fmt.Println("timeout 2")
+		fmt.Println("timeout 1")
 	}
 	wg.Wait()
 	time.Sleep(10 * time.Second)
