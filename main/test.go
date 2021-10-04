@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math"
 	"os"
+	"sync"
 	"time"
 
 	//"github.com/jalspach/OverWatch/mypackages/coms"
@@ -96,6 +97,10 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	var wg sync.WaitGroup
+	wg.Add(1)
+
+	// defaults
 	var targethost string = "slashdot.org"
 	var targetport string = "443"
 	var basetopic string = "OverWatch/SCOE/JamesOffice/" + client + "/"
@@ -119,16 +124,19 @@ func main() {
 
 	//seems like I should build a struct that gets populated and passed to publish events
 
-	go leds.Sweep(65, 1, 10)
-	PublishTempF(client, basetopic, qos)
-	PublishIP(client, basetopic, qos)
-	PublishSimplePortCheckTxt(client, basetopic, targethost, targetport, qos)
-	PublishSimplePortCheckBool(client, basetopic, targethost, targetport, qos)
-	//PublishAQI(client, basetopic, sensor, qos)
-	PublishAQI1(client, basetopic, sensor, qos)
-	leds.Setstatus(0)
-	DisplayTemp()
-
+	go func() {
+		defer wg.Done()
+		leds.Sweep(65, 1, 10)
+		PublishTempF(client, basetopic, qos)
+		PublishIP(client, basetopic, qos)
+		PublishSimplePortCheckTxt(client, basetopic, targethost, targetport, qos)
+		PublishSimplePortCheckBool(client, basetopic, targethost, targetport, qos)
+		//PublishAQI(client, basetopic, sensor, qos)
+		PublishAQI1(client, basetopic, sensor, qos)
+		leds.Setstatus(0)
+		DisplayTemp()
+	}()
+	wg.Wait()
 	time.Sleep(10 * time.Second)
 	leds.Init()
 
