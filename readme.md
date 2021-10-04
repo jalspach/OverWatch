@@ -30,6 +30,7 @@ All of this gets dumped to MQTT for remote monitoring and tranding. This device 
     * https://www.geeksforgeeks.org/goroutines-concurrency-in-golang/
     * https://go.dev/blog/context
     * https://pkg.go.dev/context
+    * https://gobyexample.com/
 * Purple Air
     * https://github.com/garethpaul/purpleair-go/blob/master/results.go
     * https://www2.purpleair.com/community/faq#hc-json-object-fields
@@ -43,14 +44,14 @@ All of this gets dumped to MQTT for remote monitoring and tranding. This device 
 * -[x] Module to upload data to MQTT
 * -[x] Get internal IP address
 * -[] Get external address
-* -[] Run network test(s) <- smple version. Need to use the origional output but figure out how to shrink it into one variable. Good test would be to report on packet loss.
+* -[] Run network test(s) <- smple version. Need to use the origional output but figure out how to shrink it into one variable. Good test would be to report on packet loss and or average ms rt time
 * -[] set the LED's as apropriate (temp or network)	
 * -[] *Maybe do this using goroutines if thats not too much extra work* <- EZ PEASY so far  - How to stop a goroutine that is running, after a forground process is done?
 * -[] build run types
 * -[] add MQTT Tombstone per example in Hive binder I have
 * -[] Pull specifics from env or local file (allows it to run from work or home easily)
-* -[] pull  clienname (topic) in code
-* -[X] add PurpleAir package
+* -[x] pull  clientname (topic) in code
+* -[x] add PurpleAir package
 
 Based on run type (below) do the above as apropirate
 	
