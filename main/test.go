@@ -84,12 +84,12 @@ func PublishAQI1(client string, basetopic string, sensor string, qos byte) int {
 	return 0
 }
 
-/* //publish AQI1
-func PublishCurrentTime(client string, basetopic string, qos byte) int {
-	curtime := util.CurrentTime()
-	reporting.Publish(client, basetopic+"Time",curtime, qos)
+//publish AQI1
+func PublishCurrentDTS(client string, basetopic string, qos byte) int {
+	curtime := util.CurrentDTS()
+	reporting.Publish(client, basetopic+"DTS", curtime, qos)
 	return 0
-} */
+}
 
 func main() {
 	//setups
@@ -111,6 +111,8 @@ func main() {
 	//leds.SweepR2G(125)
 	//leds.SweepG2R(125)
 	//leds.Test()
+	PublishCurrentDTS(client, basetopic, qos)
+	util.CurrentDTS()
 
 	var wg sync.WaitGroup
 	wg.Add(1)
@@ -130,6 +132,7 @@ func main() {
 		PublishSimplePortCheckBool(client, basetopic, targethost, targetport, qos)
 		//PublishAQI(client, basetopic, sensor, qos)
 		PublishAQI1(client, basetopic, sensor, qos)
+		PublishCurrentDTS(client, basetopic, qos)
 		c1 <- "1 Finished on time"
 	}()
 	leds.Setstatus(0)

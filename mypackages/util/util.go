@@ -92,7 +92,10 @@ func CheckAQI1(sensor string) string {
 	return s.Results[0].PM25Value
 }
 
-/* func CurrentTime() {
-	currenttime := time.Now()
- fmt.Println(currentTime.String())
-} */
+func CurrentDTS() string {
+	//currenttime := time.Now()
+	//fmt.Println(currenttime.Format())
+	fmt.Println(time.Now())
+	//fmt.Println(time.Now().Date())
+	return time.Now().Format("2006-01-02 15:04:05 PST")
+}
