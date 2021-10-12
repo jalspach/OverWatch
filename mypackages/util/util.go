@@ -5,7 +5,7 @@ import (
 	"net"
 
 	"github.com/garethpaul/purpleair-go"
-
+//"errors"
 	//"os"
 	"fmt"
 	"time"
@@ -77,9 +77,14 @@ func PortCheckSimpleBool(host, port string) string {
 	}
 }
 
+/* func CheckAverageRespTime(host string) string {
+ping address and return average
+} */
+
 func CheckAQI(sensor string) string {
 	client := purpleair.NewClient()
 	s := client.Sensor(sensor)
+	
 	for i := 0; i < len(s.Results); i++ {
 		fmt.Println("Air Quality: " + s.Results[i].PM25Value)
 	}
@@ -95,7 +100,7 @@ func CheckAQI1(sensor string) string {
 func CurrentDTS() string {
 	//currenttime := time.Now()
 	//fmt.Println(currenttime.Format())
-	fmt.Println(time.Now())
+	//fmt.Println(time.Now())
 	//fmt.Println(time.Now().Date())
 	return time.Now().Format("2006-01-02 15:04:05 PST")
 }
