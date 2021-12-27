@@ -11,3 +11,12 @@ docker:
     COPY +build/go-example .
     ENTRYPOINT ["/go-example/go-example"]
     SAVE IMAGE go-example:latest
+
+build-linux-arm5:
+
+build-linux-386:
+
+build-windows-386:
+
+build-mac:
+
