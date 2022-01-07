@@ -7,5 +7,15 @@
 	"settings": {
 		"files.autoSave": "afterDelay",
 		"editor.bracketPairColorization.enabled": true
+	},
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"label": "Make Hellooo",
+				"type": "shell",
+				"command": "make hello"
+			}
+		]
 	}
 }

@@ -1,4 +1,5 @@
 
+### https://betterprogramming.pub/my-ultimate-makefile-for-golang-projects-fcc8ca20c9bb
 GOCMD=go
 GOTEST=$(GOCMD) test
 GOVET=$(GOCMD) vet
@@ -19,6 +20,10 @@ RESET  := $(shell tput -Txterm sgr0)
 hello: ## Hello shows that you are tallking to this Makefile
 	echo "Hello...I am working"
 
+##Vendor:
+vendor: ## Download the dependencies and put them in the /vendor directory.
+	$(GOCMD) mod vendor
+
 ## Build:
 build: ## Build for the current system
 	go build -o bin/main main.go
@@ -28,7 +33,11 @@ run: ## Run the app
 	go run main.go
 
 ## Clean:
-clean: ## Removes some files
+clean: ## Remove build related files
+	rm -fr ./bin
+	rm -fr ./out
+	rm -f ./junit-report.xml checkstyle-report.xml ./coverage.xml ./profile.cov yamllint-checkstyle.xml
+
 
 ## Build-all:
 build-all: build-rpi build-linux-64bit build-windows-64bit build-mac ## Builds all of the builtin packages
