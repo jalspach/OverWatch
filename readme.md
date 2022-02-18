@@ -35,7 +35,8 @@ All of this gets dumped to MQTT for remote monitoring and tranding. This device 
     * https://github.com/garethpaul/purpleair-go/blob/master/results.go
     * https://www2.purpleair.com/community/faq#hc-json-object-fields
     * https://docs.google.com/document/d/15ijz94dXJ-YAZLi9iZ_RaBwrZ4KtYeCy08goGBwnbCU/edit
-
+* SpeedTest
+    * https://github.com/showwin/speedtest-go
 
 ## ToDo: ##
 
