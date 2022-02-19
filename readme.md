@@ -13,7 +13,7 @@ All of this gets dumped to MQTT for remote monitoring and tranding. This device 
 
 * Modules 
     * https://golangbyexample.com/package-vs-module-golang/
-    * Need links
+    * https://www.golang-book.com/books/intro/11
 * MQTT
     * https://www.cloudmqtt.com/docs/go.html
     * https://www.emqx.com/en/blog/how-to-use-mqtt-in-golang
