@@ -7,7 +7,7 @@ import (
 	"github.com/showwin/speedtest-go/speedtest"
 )
 
-func main() {
+func netcheck() {
 	user, _ := speedtest.FetchUserInfo()
 
 	serverList, _ := speedtest.FetchServerList(user)
