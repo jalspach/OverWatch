@@ -51,10 +51,13 @@ All of this gets dumped to MQTT for remote monitoring and trending. This device 
 * -[] build run types
 * -[] add MQTT Tombstone per example in Hive binder I have
 * -[] Pull specifics from env or local file (allows it to run from work or home easily)
-* -[x] pull  clientname (topic) in code
+* -[x] pull clientname (as a topic) in code
 * -[x] add PurpleAir package
+* -[] refactor the modules a little to be more topic specific
 
-Based on run type (below) do the above as appropriate
+## MQTT Documentation ##
+* Topics /clientname/item being tracked/detail as necessary i.e. /RP0001/Temperature or /RP0005/uploadspeed/target
+* Consistently map to CAN addresses and SNMP OID's as appropriate
 	
 ## Run types ##
 Name | Description or Function
